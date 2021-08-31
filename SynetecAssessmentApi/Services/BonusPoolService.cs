@@ -55,6 +55,12 @@ namespace SynetecAssessmentApi.Services
                 .Include(e => e.Department)
                 .FirstOrDefaultAsync(item => item.Id == selectedEmployeeId);
 
+            // if employee is not existing return
+            if (employee == null)
+            {
+                return new BonusPoolCalculatorResultDto();
+            }
+
             //get the total salary budget for the company
             int totalSalary = (int)_dbContext.Employees.Sum(item => item.Salary);
 
